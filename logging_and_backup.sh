@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Log each login attempt with time and username
-echo 'echo "$(whoami) logged in at $(date)" >> /var/log/login.log' | sudo tee -a /etc/profile
+echo 'echo "$(whoami) logged in at $(date)" >> /home/olav/.logs/login.log' | sudo tee -a /etc/profile
 
 # Backup important documents and compress them
 sudo bash -c 'cat << EOF > /usr/local/bin/docbackup.sh

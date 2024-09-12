@@ -20,7 +20,7 @@ sudo bash -c 'cat << EOF > /etc/netplan/01-netcfg.yaml
 network:
   version: 2
   ethernets:
-    eth0:
+    ens18:
       dhcp4: no
       addresses:
         - 192.168.1.52/24
@@ -52,3 +52,14 @@ sudo chown olav:regnskap /home/olav/shared
 sudo chmod 770 /home/olav/shared
 sudo setfacl -m g:it:r /home/olav/shared
 sudo setfacl -m g:kontor:r /home/olav/shared
+
+# Create a hidden log directory and log file
+sudo mkdir -p /home/olav/.logs
+sudo touch /home/olav/.logs/login.log
+sudo chown olav:olav /home/olav/.logs /home/olav/.logs/login.log
+sudo chmod 755 /home/olav/.logs
+sudo chmod 644 /home/olav/.logs/login.log
+
+
+# Configure /etc/profile to log all user logins
+echo 'echo "$(whoami) logged in at $(date)" >> /home/olav/.logs/login.log' | sudo tee -a /etc/profile

@@ -15,10 +15,10 @@ sudo bash -c 'cat << EOF > /usr/local/bin/password_check.sh
 last_changed=\$(chage -l olav | grep "Last password change" | cut -d: -f2)
 days_since_change=\$(( ( \$(date +%s) - \$(date -d "\$last_changed" +%s) ) / 86400 ))
 
-if [ "\$days_since_change" -ge 90 ]; then
+if [ "\$days_since_change" -ge 45 ]; then
     echo "Reminder: Change your password" | mail -s "Password Change Reminder" olav@example.com
 fi
-if [ "\$days_since_change" -ge 180 ]; then
+if [ "\$days_since_change" -ge 90 ]; then
     echo "Warning: Olav has not changed password in 6 months" | mail -s "Password Warning" it@example.com
 fi
 EOF'
@@ -26,11 +26,5 @@ EOF'
 # Make password check script executable
 sudo chmod +x /usr/local/bin/password_check.sh
 
-# Ensure password manager has no internet access on boot
-sudo bash -c 'cat << EOF > /etc/rc.local
-#!/bin/bash
-ufw deny out on tailscale0
-exit 0
-EOF'
 
 sudo chmod +x /etc/rc.local
