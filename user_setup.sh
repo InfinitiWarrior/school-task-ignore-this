@@ -37,21 +37,20 @@ sudo mkdir -p /home/olav/Documents/Regnskap /home/olav/Documents/IT /home/olav/D
 sudo mkdir /home/olav/.private_docs
 
 # Set permissions for folder access
-sudo groupadd regnskap
-sudo groupadd it
-sudo groupadd kontor
+sudo groupadd Regnskap
+sudo groupadd IT
+sudo groupadd Kontor
 
 # Assign appropriate users to the groups (modify usernames as needed)
-sudo usermod -aG regnskap olav
-sudo usermod -aG it ituser
-sudo usermod -aG kontor kontoruser
+sudo usermod -aG Regnskap olav
+#sudo usermod -aG IT ituser
+#sudo usermod -aG Kontor kontoruser
 
 # Create shared folder for document sharing
-sudo mkdir /home/olav/shared
-sudo chown olav:regnskap /home/olav/shared
-sudo chmod 770 /home/olav/shared
-sudo setfacl -m g:it:r /home/olav/shared
-sudo setfacl -m g:kontor:r /home/olav/shared
+sudo mkdir /home/olav/Documents
+sudo mkdir /home/olav/Documents/Regnskap
+sudo chown olav:regnskap /home/olav/Documents/Regnskap
+sudo chmod 770 /home/olav/Documents/Regnskap
 
 # Create a hidden log directory and log file
 sudo mkdir -p /home/olav/.logs
